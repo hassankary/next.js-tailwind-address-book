@@ -1,7 +1,7 @@
 const ModalCard = (props) => {
   const {
     modalRef,
-    fistName,
+    firstName,
     lastName,
     gender,
     email,
@@ -18,7 +18,7 @@ const ModalCard = (props) => {
       <div ref={modalRef} className="bg-white rounded-xl p-4 sm:p-8">
         <div className="text-center">
           <p className="font-bold text-xl mb-4">
-            {fistName} {lastName}
+            {firstName} {lastName}
           </p>
           <p>Gender: {gender}</p>
           <p>Email: {email}</p>
