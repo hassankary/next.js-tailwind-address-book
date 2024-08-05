@@ -69,7 +69,7 @@ const AddressBookApp = () => {
 
   const Cards = ({ firstName, lastName, gender, id, index }) => {
     return (
-      <div className=" flex flex-col hover:scale-[102%] md:text-sm text-xs transition items-center px-1 py-1 bg-white dark:bg-slate-800 text-black dark:text-slate-200 rounded-xl shadow-xl">
+      <div className=" flex flex-col md:text-sm text-xs items-center px-1 py-1 font-sans hover:font-bold transition-all bg-white dark:bg-slate-800 text-black dark:text-slate-200 rounded-xl shadow-xl">
         <div className="flex justify-center items-center h-[50px] w-full bg-gradient-to-r from-teal-500 to-purple-900 dark:from-slate-900 dark:to-slate-950 rounded-xl">
           <span className="text-white dark:text-slate-200">Photo Card</span>
         </div>
@@ -216,10 +216,10 @@ const AddressBookApp = () => {
             dataLength={dataUser.length} //This is important field to render the next data
             next={fetchData}
             hasMore={hasMore}
-            loader={<h4>Loading...</h4>}
+            loader={<h4 className="text-center text-black dark:text-slate-200 py-3 animate-pulse">Loading...</h4>}
             endMessage={
-              <p style={{ textAlign: "center" }}>
-                <b>Yay! You have seen it all</b>
+              <p style={{ textAlign: "center" }} className="font-bold py-3">
+                Yay! You have seen it all
               </p>
             }
           >
