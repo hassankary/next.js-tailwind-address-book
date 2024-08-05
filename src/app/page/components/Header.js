@@ -11,7 +11,6 @@ const Header = ({ searchTitle, onChange, onClick }) => {
   return (
     <div className="fixed flex z-10 top-0 bg-gradient-to-bl from-teal-500 to-purple-900 dark:from-slate-900 dark:to-slate-950 dark:text-slate-200 text-white h-[70px] w-full">
       <div className="flex justify-center items-center my-auto w-1/4 md:w-[45%] space-x-2 order-1">
-        <UserGroupIcon className="h-7 w-7" />
         <button
           onClick={() => {
             window.scrollTo({
@@ -19,9 +18,10 @@ const Header = ({ searchTitle, onChange, onClick }) => {
               behavior: "smooth",
             });
           }}
-          className="hidden md:flex font-bold text-lg"
+          className="flex justify-center items-center w-full space-x-2"
         >
-          Address Book
+          <UserGroupIcon className="h-7 w-7" />
+          <h1 className="hidden md:flex font-bold text-lg">Address Book</h1>
         </button>
       </div>
       <div className="flex justify-center items-center w-1/4 md:w-[10%] order-3 md:order-2">
