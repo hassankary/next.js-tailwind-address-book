@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Header from "./components/Header";
 import ModalCard from "./components/ModalCard";
+import Image from "next/image";
 
 const AddressBookApp = () => {
   const [data, setData] = useState([]);
@@ -67,18 +68,26 @@ const AddressBookApp = () => {
     });
   };
 
-  const Cards = ({ firstName, lastName, gender, id, index }) => {
+  const Cards = ({ firstName, lastName, gender, id, index, src }) => {
     return (
       <div className=" flex flex-col md:text-sm text-xs items-center px-1 py-1 font-sans hover:font-bold transition-all bg-white dark:bg-slate-800 text-black dark:text-slate-200 rounded-xl shadow-xl">
-        <div className="flex justify-center items-center h-[50px] w-full bg-gradient-to-r from-teal-500 to-purple-900 dark:from-slate-900 dark:to-slate-950 rounded-xl">
-          <span className="text-white dark:text-slate-200">Photo Card</span>
+        <div className="flex justify-center items-center h-[50px] w-full bg-gradient-to-r from-teal-500 to-purple-900 dark:from-slate-900 dark:to-slate-950 rounded-t-xl">
+          <Image
+            className="rounded-lg  "
+            src={src}
+            width={40}
+            height={40}
+            alt="user photo"
+            quality={100}
+            unoptimized
+          />
         </div>
         <div className="flex flex-col justify-center items-center py-2">
           <h1>
-            Name: {firstName} {lastName}
+            {firstName} {lastName}
           </h1>
-          <h1>
-            Gender: {gender} {data.gender}
+          <h1 className="capitalize">
+            {gender} {data.gender}
           </h1>
         </div>
         <div className="flex space-x-1">
@@ -86,7 +95,7 @@ const AddressBookApp = () => {
             id={id}
             onClick={(e) => detailCard(e)}
             index={index}
-            className="flex justify-center items-center p-2 text-white bg-gradient-to-r from-teal-500 to-purple-900 dark:from-slate-900 dark:to-slate-950 dark:text-slate-200 rounded-xl"
+            className="flex justify-center items-center px-3 py-2 text-white bg-gradient-to-r from-teal-500 to-purple-900 dark:from-slate-900 dark:to-slate-950 dark:text-slate-200 rounded-lg"
           >
             Detail
           </button>
@@ -94,7 +103,7 @@ const AddressBookApp = () => {
             id={id}
             onClick={(e) => deleteCard(e)}
             index={index}
-            className="flex justify-center items-center p-2 text-white bg-gradient-to-r from-red-500 to-yellow-500 dark:from-slate-900 dark:to-red-950 dark:text-slate-200 rounded-xl"
+            className="flex justify-center items-center px-3 py-2 text-white bg-gradient-to-r from-red-500 to-yellow-500 dark:from-slate-900 dark:to-red-950 dark:text-slate-200 rounded-lg"
           >
             Delete
           </button>
@@ -122,12 +131,13 @@ const AddressBookApp = () => {
       <>
         <ModalCard
           modalRef={modalRef}
+          src={detailModal.picture.medium}
           firstName={detailModal.name.first}
           lastName={detailModal.name.last}
           gender={detailModal.gender}
           email={detailModal.email}
           phone={detailModal.phone}
-          streetName={detailModal.gender}
+          streetName={detailModal.location.street.name}
           streetNumber={detailModal.location.street.number}
           city={detailModal.location.city}
           country={detailModal.location.country}
@@ -193,6 +203,7 @@ const AddressBookApp = () => {
                 {searchResult?.map((data, index) => {
                   return (
                     <Cards
+                      src={data.picture.medium}
                       firstName={data.name.first}
                       lastName={data.name.last}
                       gender={data.gender}
@@ -216,7 +227,11 @@ const AddressBookApp = () => {
             dataLength={dataUser.length} //This is important field to render the next data
             next={fetchData}
             hasMore={hasMore}
-            loader={<h4 className="text-center text-black dark:text-slate-200 py-3 animate-pulse">Loading...</h4>}
+            loader={
+              <h4 className="text-center text-black dark:text-slate-200 py-3 animate-pulse">
+                Loading...
+              </h4>
+            }
             endMessage={
               <p style={{ textAlign: "center" }} className="font-bold py-3">
                 Yay! You have seen it all
@@ -227,6 +242,7 @@ const AddressBookApp = () => {
               {dataUser?.map((data, index) => {
                 return (
                   <Cards
+                    src={data.picture.medium}
                     firstName={data.name.first}
                     lastName={data.name.last}
                     gender={data.gender}
